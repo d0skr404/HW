@@ -39,6 +39,5 @@ def calculate_average(file):
     mean_weight = round(df[weight].mean().values[0], 2)
     return f'Average height for student: {mean_height}\nAverage weight for student: {mean_weight}'
 
-
 path = '/Users/denisoskorib/Documents/hw.csv'
 calculate_average(path)
