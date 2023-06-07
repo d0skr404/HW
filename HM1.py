@@ -24,23 +24,25 @@ def measure_memory_usage(f):
 
 
 def lfu_cache(max_limit=64):
-    cache = OrderedDict()
-    frequency = defaultdict(int)
     def internal(f):
         @functools.wraps(f)
         def deco(*args, **kwargs):
             cache_key = (args, tuple(kwargs.items()))
-            if cache_key in cache:
-                return cache[cache_key]
+            if cache_key in deco._cache:
+                return deco._cache[cache_key]
             result = f(*args, **kwargs)
-            cache[cache_key] = result
-            frequency[cache_key] += 1
-            if len(cache) > max_limit:
-                min_freq_key = min(frequency, key=frequency.get)
-                cache.pop(min_freq_key)
-                frequency.pop(min_freq_key)
+            deco._cache[cache_key] = result
+            deco._frequency[cache_key] += 1
+            if len(deco._cache) > max_limit:
+                min_freq_key = min(deco._frequency, key=deco._frequency.get)
+                deco._cache.pop(min_freq_key)
+                deco._frequency.pop(min_freq_key)
             return result
+
+        deco._cache = OrderedDict()
+        deco._frequency = defaultdict(int)
         return deco
+
     return internal
 
 

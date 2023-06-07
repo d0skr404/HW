@@ -31,7 +31,8 @@ def generate_password():
 generate_password()
 
 @app.route("/average")
-def calculate_average(file):
+def calculate_average():
+    file = '/Users/denisoskorib/Documents/hw.csv'
     df = pd.read_csv(file)
     height = [col for col in df.columns if 'Height' in col]
     weight = [col for col in df.columns if 'Weight' in col]
@@ -39,5 +40,5 @@ def calculate_average(file):
     mean_weight = round(df[weight].mean().values[0], 2)
     return f'Average height for student: {mean_height}\nAverage weight for student: {mean_weight}'
 
-path = '/Users/denisoskorib/Documents/hw.csv'
-calculate_average(path)
+
+
