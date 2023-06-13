@@ -1,0 +1,25 @@
+Index: .idea/workspace.xml
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -4,9 +4,7 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="c45a744b-3e3f-4114-8e02-a7dff02dac44" name="Changes" comment="HM1 fixedgit push">
+-      <change beforePath="$PROJECT_DIR$/HM3.py" beforeDir="false" afterPath="$PROJECT_DIR$/HM3.py" afterDir="false" />
+-    </list>
++    <list default="true" id="c45a744b-3e3f-4114-8e02-a7dff02dac44" name="Changes" comment="HM1 fixedgit push" />
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -103,7 +101,7 @@
+       <workItem from="1686646945965" duration="11044000" />
+       <workItem from="1686666872418" duration="4893000" />
+       <workItem from="1686677314628" duration="280000" />
+-      <workItem from="1686677623368" duration="2827000" />
++      <workItem from="1686677623368" duration="3220000" />
+     </task>
+     <task id="LOCAL-00001" summary="HM1 fixed">
+       <created>1686670564937</created>
