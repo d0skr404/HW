@@ -10,7 +10,6 @@ from webargs.flaskparser import use_kwargs
 
 app = Flask(__name__)
 
-
 @app.route("/generate_students")
 @use_kwargs(
     {
