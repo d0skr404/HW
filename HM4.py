@@ -6,7 +6,6 @@ from webargs import fields
 
 app = Flask(__name__)
 
-
 def execute_query(query, args=()):
     with sqlite3.connect('chinook.db') as connection:
         cursor = connection.cursor()
