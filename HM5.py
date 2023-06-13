@@ -15,7 +15,6 @@ def execute_query(query, args=()):
         records = cursor.fetchall()
     return records
 
-
 @app.route('/stats_by_city')
 @use_kwargs({
     'genre': fields.Str(required=True)
