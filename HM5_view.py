@@ -1,19 +1,10 @@
-import sqlite3
-
 from flask import Flask
 from webargs.flaskparser import use_kwargs
 from webargs import fields
 
+from database_handler import execute_query
+
 app = Flask(__name__)
-
-
-def execute_query(query, args=()):
-    with sqlite3.connect('chinook.db') as connection:
-        cursor = connection.cursor()
-        cursor.execute(query, args)
-        connection.commit()
-        records = cursor.fetchall()
-    return records
 
 @app.route('/stats_by_city')
 @use_kwargs({
