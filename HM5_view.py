@@ -6,6 +6,7 @@ from database_handler import execute_query
 
 app = Flask(__name__)
 
+
 @app.route('/stats_by_city')
 @use_kwargs({
     'genre': fields.Str(required=True)
@@ -13,36 +14,34 @@ app = Flask(__name__)
     location="query")
 def stats_by_city(genre):
     query = """
-            SELECT City
-            FROM (SELECT *
-            FROM (SELECT Name, City, popular,
-            row_number() OVER (partition by Name ORDER BY popular desc )
-            as row_number
-            FROM (SELECT g.Name, cus.City, count() AS popular
-            FROM genres g
-            LEFT JOIN tracks t ON g.GenreId = t.GenreId
-            LEFT JOIN invoice_items invi ON t.TrackId = invi.TrackId
-            LEFT JOIN invoices inv ON inv.InvoiceId = invi.InvoiceId
-            LEFT JOIN customers cus ON inv.CustomerId = cus.CustomerId
-            WHERE City IS NOT NULL
-            GROUP BY g.Name, cus.City))
-            WHERE row_number = 1)
+            SELECT * FROM(SELECT Name, City
+            FROM (
+                SELECT g.Name, cus.City, COUNT(*) AS popular
+                FROM genres g
+                LEFT JOIN tracks t ON g.GenreId = t.GenreId
+                LEFT JOIN invoice_items invi ON t.TrackId = invi.TrackId
+                LEFT JOIN invoices inv ON inv.InvoiceId = invi.InvoiceId
+                LEFT JOIN customers cus ON inv.CustomerId = cus.CustomerId
+                WHERE City IS NOT NULL
+                GROUP BY g.Name, cus.City
+            ) AS subquery
+            GROUP BY Name
+            HAVING popular = MAX(popular))
     """
 
-    fields = {}
-
     if genre:
-        fields['Name'] = genre
+        query += f" WHERE Name = '{genre}'"
 
-    if fields:
-        query += " WHERE " + " AND ".join(
-            f"{key}=?" for key in fields.keys())
+    records = execute_query(query=query)
 
-    records = execute_query(query=query, args=tuple(fields.values()))
+    # if records == []:
+    #     return "Don't have any information, try another type of genre"
+    # return records
 
-    if records == []:
+    if records:
+        return records
+    else:
         return "Don't have any information, try another type of genre"
-    return records
 
 
 if __name__ == '__main__':
