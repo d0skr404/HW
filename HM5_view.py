@@ -34,14 +34,9 @@ def stats_by_city(genre):
 
     records = execute_query(query=query)
 
-    # if records == []:
-    #     return "Don't have any information, try another type of genre"
-    # return records
-
     if records:
         return records
-    else:
-        return "Don't have any information, try another type of genre"
+    return "Don't have any information, try another type of genre"
 
 
 if __name__ == '__main__':
