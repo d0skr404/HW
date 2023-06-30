@@ -61,7 +61,7 @@ with Coloriez('green') as c:
 print("print in default color")
 
 
-class Shape:  # class Shape(object)
+class Shape:
     def __init__(self, x, y):
         self.x = x
         self.y = y
@@ -184,8 +184,8 @@ circle = Circle(0, 0, 5)
 point_inside = Point(2, 2)
 point_outside = Point(7, 7)
 
-print(point_inside in circle)  # Выведет True
-print(point_outside in circle)  # Выведет False
+print(point_inside in circle)
+print(point_outside in circle)
 
 
 
