@@ -160,6 +160,7 @@ cython_debug/
 
 .idea
 .idea/workspace.iml
+.idea/HW.iml
 .idea/*.iml
 idea/
 idea
